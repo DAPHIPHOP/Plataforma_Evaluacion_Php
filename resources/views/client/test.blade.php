@@ -3,6 +3,25 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col">
+             @php
+                 $i=1;
+             @endphp
+             @foreach($categories as $category)
+               @foreach($category->categoryQuestions as $question)
+               <button type="button" class="btn btn-outline-dark mb-1">
+               {{ $i }}
+               </button>    
+               @php
+                   $i++;
+               @endphp
+              @endforeach
+             @endforeach
+
+             <p class="text-center font-weight-bold">Tiempo Restante</p>
+             <p class="text-center" >05:36</p>
+           
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Test</div>

@@ -22,8 +22,8 @@
 
                     <p>Total points: {{ $result->total_points }} points</p>
 
-                    <a href="{{ route('client.results.send', $result->id) }}" class="btn btn-primary">GET DETAILS IN PDF BY EMAIL</a>
-
+               {{--      <a href="{{ route('client.results.send', $result->id) }}" class="btn btn-primary">GET DETAILS IN PDF BY EMAIL</a>
+ --}}
                 </div>
             </div>
         </div>

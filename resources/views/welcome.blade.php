@@ -85,7 +85,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <a href="{{ route('client.test') }}">START TEST</a>
+                    <a href="{{ route('client.starttest') }}">START TEST</a>
                 </div>
 
                 <div class="links">

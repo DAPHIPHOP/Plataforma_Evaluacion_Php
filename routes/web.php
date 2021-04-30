@@ -1,5 +1,6 @@
 <?php
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -9,6 +10,7 @@ Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
     Route::get('dashboard', 'HomeController@index')->name('home');
     Route::get('change-password', 'ChangePasswordController@create')->name('password.create');
     Route::post('change-password', 'ChangePasswordController@update')->name('password.update');
+    Route::get('start-test', 'TestsController@start')->name('starttest');
     Route::get('test', 'TestsController@index')->name('test');
     Route::post('test', 'TestsController@store')->name('test.store');
     Route::get('results/{result_id}', 'ResultsController@show')->name('results.show');

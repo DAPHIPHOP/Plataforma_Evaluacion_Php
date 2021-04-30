@@ -8,6 +8,11 @@ use App\Option;
 
 class TestsController extends Controller
 {
+
+    public function start()
+    {
+        return view('client.starttest');
+    } 
     public function index()
     {
         $categories = Category::with(['categoryQuestions' => function ($query) {
