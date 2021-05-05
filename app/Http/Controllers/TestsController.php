@@ -2,49 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Quizz;
 use App\Http\Requests\StoreTestRequest;
 use App\Option;
-
+use App\Question;
+use App\QuizzStudent;
+use App\QuestionResult;
 class TestsController extends Controller
 {
 
     public function start()
     {
         return view('client.starttest');
-    } 
+    }
     public function index()
     {
-        $categories = Category::with(['categoryQuestions' => function ($query) {
-                $query->inRandomOrder()
-                    ->with(['questionOptions' => function ($query) {
-                        $query->inRandomOrder();
-                    }]);
-            }])
-            ->whereHas('categoryQuestions')
-            ->get();
+        $quizz = Quizz::find(1);
+        $questions = Question::whereQuizzId($quizz->id)->paginate(1);
+        $question=$questions->first();
 
-        return view('client.test', compact('categories'));
+        $student = auth()->user()->alumno;
+        $quizz_student = QuizzStudent::firstOrCreate(['quizz_id' => $quizz->id, 'student_id' => $student->id]);
+
+        $marquedByStudent=$question->marquedsByStudent->where('question_id',$question->id)
+                                                      ->where('quizz_id',$quizz_student->id)->first();
+
+
+        return view('client.test', ['questions' => $questions,'marqued'=>$marquedByStudent]);
     }
 
     public function store(StoreTestRequest $request)
     {
-        $options = Option::find(array_values($request->input('questions')));
+        $student = auth()->user()->alumno;
 
-        $result = auth()->user()->userResults()->create([
-            'total_points' => $options->sum('points')
-        ]);
+        $question = Question::findOrfail(key($request->questions));
+        $option_marqued = Option::findOrFail($request->questions[key($request->questions)]);
+        $quizz = $question->quizz;
 
-        $questions = $options->mapWithKeys(function ($option) {
-            return [$option->question_id => [
-                        'option_id' => $option->id,
-                        'points' => $option->points
-                    ]
-                ];
-            })->toArray();
 
-        $result->questions()->sync($questions);
+        $correctOption=$question->questionOptions->where('is_answer',1)->first();
 
-        return redirect()->route('client.results.show', $result->id);
+        $points=0;
+        if($option_marqued->id==$correctOption->id){
+        $points=$question->points;
+        }
+
+        $quizz_student = QuizzStudent::firstOrCreate(['quizz_id' => $quizz->id, 'student_id' => $student->id]);
+
+        $anser_student=QuestionResult::updateOrCreate(['quizz_id' => $quizz->id,'question_id'=>$question->id],
+        ['option_id'=>$option_marqued->id,'points'=>$points]);
+
+
+        return response()->json(['message'=>'Respuesta guardada']);
     }
 }

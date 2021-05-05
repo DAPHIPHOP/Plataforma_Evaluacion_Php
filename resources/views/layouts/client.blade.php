@@ -43,7 +43,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('client.test') }}">
+                                <a class="nav-link" href="{{ route('client.starttest') }}">
                                     {{ __('Start Test') }}
                                 </a>
                             </li>

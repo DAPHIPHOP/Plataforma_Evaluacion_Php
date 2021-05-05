@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\QuestionResult;
 class Question extends Model
 {
     use SoftDeletes;
@@ -35,8 +35,13 @@ class Question extends Model
         return $this->belongsToMany(Result::class);
     }
 
-    public function category()
+    public function quizz()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Quizz::class, 'quizz_id');
     }
+
+  public function marquedsByStudent()
+  {
+      return $this->hasMany(QuestionResult::class,'question_id','id');
+  }
 }

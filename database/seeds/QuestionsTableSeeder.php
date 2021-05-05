@@ -18,7 +18,7 @@ class QuestionsTableSeeder extends Seeder
 
         foreach($categories as $category)
         {
-            foreach(range(1,2) as $index)
+            foreach(range(1,5) as $index)
             {
                 $category->quizzQuestions()->create([
                     'question_text' => $faker->sentence(4),

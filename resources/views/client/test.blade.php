@@ -1,59 +1,37 @@
 @extends('layouts.client')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col">
-             <p class="text-center font-weight-bold font-weight-bold"><h5>Panel de navegacion</h5> </p>
-             @php
-                 $i=1;
-             @endphp
-             @foreach($categories as $category)
-               @foreach($category->categoryQuestions as $question)
-               <button type="button" class="btn btn-outline-dark mb-1">
-               {{ $i }}
-               </button>    
-               @php
-                   $i++;
-               @endphp
-              @endforeach
-             @endforeach
+        <div class="col col mb-5 mt-5">
+             <p class="text-center font-weight-bold font-weight-bold col mb-5 mt-5 text-info">Panel de navegacion </p>
 
              <p class="text-center font-weight-bold">Tiempo Restante</p>
              <p class="text-center" >05:36</p>
-           
+<p class="text-center"><a href="javascript:void(0);" class="btn-wide btn btn-success">Finalizar evaluacion</a></p>
         </div>
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Test</div>
-
-                <div class="card-body">
-                    @if(session('status'))
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('client.test.store') }}">
+        <div class="col mb-5 mt-5 font-weight-bold"><h4>{{$questions->first()->quizz->name}}</h4></div>
+                    <form method="POST" action="{{ route('client.test.store') }}" id="form-create">
                         @csrf
-                        @foreach($categories as $category)
-                            <div class="card mb-3">
-                                <div class="card-header">{{ $category->name }}</div>
-                
-                                <div class="card-body">
-                                    @foreach($category->categoryQuestions as $question)
-                                        <div class="card @if(!$loop->last)mb-3 @endif">
-                                            <div class="card-header">{{ $question->question_text }}</div>
-                        
+                                    @foreach($questions as $question)
+                                        <div class="card ">
+                                            <div class="card-header"><p>{{ $question->question_text }}</p>
+                                            <p class="text-info">{{ $question->points }} puntos.</p></div>
+
                                             <div class="card-body">
                                                 <input type="hidden" name="questions[{{ $question->id }}]" value="">
                                                 @foreach($question->questionOptions as $option)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="questions[{{ $question->id }}]" id="option-{{ $option->id }}" value="{{ $option->id }}"@if(old("questions.$question->id") == $option->id) checked @endif>
+                                                  @php
+                                                  $checked="";
+                                                      if($marqued){
+                                                        if ($marqued->option_id==$option->id)
+                                                      $checked="checked";
+                                                      }
+                                                  @endphp
+                                                    <div class="form-check mb-3">
+                                                        <input {{$checked}} class="form-check-input" type="radio" name="questions[{{ $question->id }}]" id="option-{{ $option->id }}" value="{{ $option->id }}"@if(old("questions.$question->id") == $option->id) checked @endif onChange="submitAnswer();">
                                                         <label class="form-check-label" for="option-{{ $option->id }}">
                                                             {{ $option->option_text }}
                                                         </label>
@@ -68,21 +46,34 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                </div>
-                            </div>
-                        @endforeach
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
                     </form>
-                </div>
-            </div>
+
+
         </div>
     </div>
+    <div class=" col-12 d-flex justify-content-center mt-5 pagination pagination-lg">
+        {{$questions->links()}}
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    function submitAnswer() {
+
+        dataF= new FormData($("#form-create")[0]);
+          $.ajax({
+                    url: '{{route("client.test.store")}}',
+                    method: 'POST',
+                    data: dataF,
+       cache:false,
+         dataType:'json',
+        processData:false,
+         contentType:false,
+
+                    success: function (response) {
+                         console.log(response);
+                    }
+                 });
+     }
+</script>
 @endsection

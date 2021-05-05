@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
-
+use App\Student;
 class User extends Authenticatable
 {
     use SoftDeletes, Notifiable, HasApiTokens;
@@ -42,27 +42,17 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    public function getIsAdminAttribute()
-    {
-        return $this->roles()->where('id', 1)->exists();
-    }
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         self::created(function (User $user) {
-            $registrationRole = config('panel.registration_default_role');
 
-            if (!$user->roles()->get()->contains($registrationRole)) {
-                $user->roles()->attach($registrationRole);
-            }
+
+
         });
     }
 
-    public function userResults()
-    {
-        return $this->hasMany(Result::class, 'user_id', 'id');
-    }
 
     public function getEmailVerifiedAtAttribute($value)
     {
@@ -86,8 +76,10 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
-    public function roles()
+    public function alumno()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->hasOne(Student::class,'user_id','id');
     }
+
+
 }

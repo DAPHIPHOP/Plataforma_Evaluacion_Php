@@ -13,12 +13,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('client.home');
+        //;
+        if (auth()->user()->rol_id==1) {
+            return redirect()->route('admin.home')->with('status', session('status'));
+        }
+
+        return  view('client.home');
     }
 
     public function redirect()
     {
-        if (auth()->user()->is_admin) {
+
+      if (auth()->user()->rol_id==1) {
             return redirect()->route('admin.home')->with('status', session('status'));
         }
 
