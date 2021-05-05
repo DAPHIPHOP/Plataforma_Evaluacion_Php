@@ -1,6 +1,7 @@
 <?php
 
-use App\Category;
+use App\Question;
+use App\Quizz;
 use Illuminate\Database\Seeder;
 
 class QuestionsTableSeeder extends Seeder
@@ -13,14 +14,15 @@ class QuestionsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        $categories = Category::all();
+        $categories = Quizz::all();
 
         foreach($categories as $category)
         {
             foreach(range(1,2) as $index)
             {
-                $category->categoryQuestions()->create([
-                    'question_text' => $faker->sentence(4)
+                $category->quizzQuestions()->create([
+                    'question_text' => $faker->sentence(4),
+                    'points'=>1
                 ]);
             }
         }

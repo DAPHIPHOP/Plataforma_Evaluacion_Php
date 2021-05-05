@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Quizz extends Model
 {
     use SoftDeletes;
 
-    public $table = 'categories';
+    public $table = 'quizz';
 
     protected $dates = [
         'created_at',
@@ -19,13 +19,17 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'disp_from',
+        'disp_to',
+        'duration',
+        'teacher_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function categoryQuestions()
+    public function quizzQuestions()
     {
-        return $this->hasMany(Question::class, 'category_id', 'id');
+        return $this->hasMany(Question::class, 'quizz_id', 'id');
     }
 }

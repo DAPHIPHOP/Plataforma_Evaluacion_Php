@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col">
+             <p class="text-center font-weight-bold font-weight-bold"><h5>Panel de navegacion</h5> </p>
              @php
                  $i=1;
              @endphp
