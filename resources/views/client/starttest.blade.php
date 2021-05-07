@@ -10,7 +10,7 @@
                     <p class="text-center font-weight-bold">
                         Código de evaluación
                     </p>
-                    <input class="form-control form-control-lg " id="exampleFormControlInput1" placeholder="Ingrese el codigo aqui" type="text" required="">
+                    <input class="form-control form-control-lg " id="exampleFormControlInput1" placeholder="Ingrese el codigo aqui" type="text" required="" name="id">
                     </input>
                 </div>
                 <div class="form-check mt-5 mb-2">

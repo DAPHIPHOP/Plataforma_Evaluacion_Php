@@ -13,6 +13,7 @@ Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
     Route::get('start-test', 'TestsController@start')->name('starttest');
     Route::get('test', 'TestsController@index')->name('test');
     Route::post('test', 'TestsController@store')->name('test.store');
+    Route::get('finish-exam/{id}','TestsController@finish')->name('test.finish');
     Route::get('results/{result_id}', 'ResultsController@show')->name('results.show');
     Route::get('send/{result_id}', 'ResultsController@send')->name('results.send');
 });

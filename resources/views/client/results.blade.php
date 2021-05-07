@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Results of your test</div>
+                <div class="card-header bg-success text-bold text-white" >Resultados de la evaluacion</div>
 
                 <div class="card-body">
                     @if(session('status'))
@@ -20,7 +20,7 @@
                         </div>
                     @endif
 
-                    <p>Total points: {{ $result->total_points }} points</p>
+                    <p class="text-info">Total de puntos: {{ $results }} puntos de {{$total}}</p>
 
                {{--      <a href="{{ route('client.results.send', $result->id) }}" class="btn btn-primary">GET DETAILS IN PDF BY EMAIL</a>
  --}}

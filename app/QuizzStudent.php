@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Quizz;
+use App\QuestionResult;
 class QuizzStudent extends Model
 {
 
@@ -15,11 +16,18 @@ class QuizzStudent extends Model
     protected $fillable = [
         'quizz_id',
         'student_id',
+        'start',
+        'estado'
 
     ];
 
-   /*  public function question()
+    public function quizz()
     {
-        return $this->belongsTo(Question::class, 'question_id');
-    } */
+        return $this->belongsTo(Quizz::class, 'quizz_id');
+    }
+
+    public function results()
+    {
+        return $this->hasMany(QuestionResult::class,'quizz_id');
+    }
 }

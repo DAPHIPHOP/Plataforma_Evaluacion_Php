@@ -14,12 +14,12 @@ class QuizzesTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        foreach (range(1, 5) as $id) {
+        foreach (range(1, 10) as $id) {
             Quizz::insert([
                 'id' => $id,
                 'name' => $faker->sentence(3),
                 'disp_from'=>now(),
-                'disp_to'=>Carbon::now()->addHours(1),
+                'disp_to'=>Carbon::now()->addHours(12),
                 'duration'=>60,
                 'teacher_id'=>1,
             ]);
