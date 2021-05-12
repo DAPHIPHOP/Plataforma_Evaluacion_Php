@@ -7,7 +7,7 @@
         <div class="card mx-4">
             <div class="card-body p-4">
 
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <h1>{{ trans('panel.site_title') }}</h1>
                     <p class="text-muted">{{ trans('global.register') }}</p>
@@ -62,7 +62,14 @@
                         </div>
                         <input type="password" name="password_confirmation" class="form-control" required placeholder="{{ trans('global.login_password_confirmation') }}">
                     </div>
-
+                <hr>
+                    <div class="form-group mb-4">
+                        <label for="image" class="text-muted">Ingrese una Fotografía para identificarlo</label>
+                        <input id="input_subir" type="file" name="image" class="form-control" required placeholder="Seleccione una Imagen">
+                        <div class="row bg-secondary mt-2 mx-2" id="contenedor_imagen" style="display:none;">
+                            <img class="mx-auto my-2" src="" id="imagen_subida" alt="" width="50%">
+                        </div>
+                    </div>
                     <button class="btn btn-block btn-primary">
                         {{ trans('global.register') }}
                     </button>
@@ -74,4 +81,20 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        var contenedor_imagen = document.getElementById("contenedor_imagen");
+        var input_subir = document.getElementById("input_subir");
+        var imagen_subida = document.getElementById("imagen_subida");
+
+        input_subir.addEventListener("change",function(){
+            contenedor_imagen.style.display = "flex"
+            console.log(input_subir.files[0]);
+            if (input_subir.files.length>0) {
+              imagen_subida.src = URL.createObjectURL(input_subir.files[0]);  
+            }
+        });
+    </script>
 @endsection
