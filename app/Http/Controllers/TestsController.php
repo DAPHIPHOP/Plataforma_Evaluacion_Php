@@ -23,8 +23,8 @@ class TestsController extends Controller
 
         $quizz = Quizz::findOrFail($request->id);
 
-        $questions = Question::whereQuizzId($quizz->id)->paginate(1)->appends(['id' => $request->id]);
-        $question = $questions->first();
+        $questions = Question::whereQuizzId($quizz->id)->inRandomOrder()->get();
+
 
         $student = auth()->user()->alumno;
         $quizz_student = QuizzStudent::where(['quizz_id' => $quizz->id, 'student_id' => $student->id])->exists();
@@ -38,11 +38,16 @@ class TestsController extends Controller
         if ($quizz_student->estado == 'Finalizado') {
             return redirect()->route('client.test.finish', ['id' => $quizz_student->id]);
         }
-        $marquedByStudent = $question->marquedsByStudent->where('question_id', $question->id)
-            ->where('quizz_id', $quizz_student->id)->first();
+        $marqueds = [];
+        foreach ($questions as $question) {
+
+            //$marquedByStudent = $question->marquedsByStudent->first();
+            $marquedsByStudent[] = $question->marquedsByStudent->where('quizz_id', $quizz_student->id)->first();
+        }
 
 
-        return view('client.test', ['questions' => $questions, 'marqued' => $marquedByStudent, 'intento' => $quizz_student]);
+
+        return view('client.test', ['questions' => $questions, 'marqueds' => $marquedsByStudent, 'intento' => $quizz_student]);
     }
 
     public function store(StoreTestRequest $request)
@@ -62,14 +67,14 @@ class TestsController extends Controller
         }
 
         $quizz_student = QuizzStudent::where(['quizz_id' => $quizz->id, 'student_id' => $student->id])->first();
-if($quizz_student->estado!='Finalizado'){
+        if ($quizz_student->estado != 'Finalizado') {
 
-    $anser_student = QuestionResult::updateOrCreate(
-        ['quizz_id' => $quizz_student->id, 'question_id' => $question->id],
-        ['option_id' => $option_marqued->id, 'points' => $points]
-    );
-    return response()->json(['message' => 'Respuesta no guardada']);
-}
+            $anser_student = QuestionResult::updateOrCreate(
+                ['quizz_id' => $quizz_student->id, 'question_id' => $question->id],
+                ['option_id' => $option_marqued->id, 'points' => $points]
+            );
+            return response()->json(['message' => 'Respuesta no guardada']);
+        }
 
 
         return response()->json(['message' => 'Respuesta guardada']);
@@ -88,5 +93,29 @@ if($quizz_student->estado!='Finalizado'){
         $quizz = $quizz_student->quizz->quizzQuestions->sum('points');
 
         return view('client.results', ['results' => $results, 'total' => $quizz]);
+    }
+
+    public function checkMarqueds($id)
+    {
+        $quizz_student = QuizzStudent::findOrFail($id);
+        $quizz = $quizz_student->quizz;
+        $questions = $quizz->quizzQuestions;
+        $noMarqueds = [];
+        foreach ($questions as $question) {
+
+            //$marquedByStudent = $question->marquedsByStudent->first();
+            $marquedsByStudent = $question->marquedsByStudent->where('quizz_id', $quizz_student->id)->first();
+            if ($marquedsByStudent == null) {
+                $noMarqueds[] = ['id' => $question->id, 'name' => $question->question_text];
+            }
+        }
+
+        if(count($noMarqueds)>=1){
+            return response()->json(['sinMarcar' => $noMarqueds,'success'=>false]);
+        }else{
+           return response()->json(['success'=>true]);
+        }
+
+
     }
 }

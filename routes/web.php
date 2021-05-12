@@ -1,19 +1,23 @@
 <?php
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 // User
 Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
+
     Route::get('home', 'HomeController@redirect');
     Route::get('dashboard', 'HomeController@index')->name('home');
     Route::get('change-password', 'ChangePasswordController@create')->name('password.create');
     Route::post('change-password', 'ChangePasswordController@update')->name('password.update');
+
     Route::get('start-test', 'TestsController@start')->name('starttest');
+    Route::post('check-marqueds/{id}', 'TestsController@checkMarqueds')->name('checkMarqueds');
     Route::get('test', 'TestsController@index')->name('test');
     Route::post('test', 'TestsController@store')->name('test.store');
-    Route::get('finish-exam/{id}','TestsController@finish')->name('test.finish');
+    Route::get('finish-exam/{id}', 'TestsController@finish')->name('test.finish');
     Route::get('results/{result_id}', 'ResultsController@show')->name('results.show');
     Route::get('send/{result_id}', 'ResultsController@send')->name('results.send');
 });
