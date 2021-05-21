@@ -13,6 +13,7 @@ Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
     Route::get('change-password', 'ChangePasswordController@create')->name('password.create');
     Route::post('change-password', 'ChangePasswordController@update')->name('password.update');
 
+
     Route::get('start-test', 'TestsController@start')->name('starttest');
     Route::post('check-marqueds/{id}', 'TestsController@checkMarqueds')->name('checkMarqueds');
     Route::get('test', 'TestsController@index')->name('test');
@@ -34,6 +35,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Roles
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
+
+
+
+    Route::resource('quizz', 'QuizzController');
 
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
