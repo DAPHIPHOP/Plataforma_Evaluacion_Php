@@ -49,4 +49,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Results
     Route::delete('results/destroy', 'ResultsController@massDestroy')->name('results.massDestroy');
     Route::resource('results', 'ResultsController');
+
+    //BLOCAPP
+    Route::get('blocapp', 'BlocappController@index')->name('blocapp');
+    Route::get('blocapp-results', 'BlocappController@results')->name('blocappresults');
+    //Route::resource('resultsb', 'BlocappController@results'); 
+
+//    Route::get('/admin/blocapp', function () {
+//        return view('blocapp.index');
 });

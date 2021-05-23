@@ -8,6 +8,7 @@ class CreatePermissionRolePivotTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('permission_role')) return;
         Schema::create('permission_role', function (Blueprint $table) {
             $table->unsignedInteger('role_id');
 

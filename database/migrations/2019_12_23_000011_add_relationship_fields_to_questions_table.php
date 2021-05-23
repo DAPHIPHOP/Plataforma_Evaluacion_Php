@@ -8,6 +8,7 @@ class AddRelationshipFieldsToQuestionsTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('questions')) return;
         Schema::table('questions', function (Blueprint $table) {
             $table->unsignedInteger('category_id');
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class AddRelationshipFieldsToResultsTable extends Migration
 {
     public function up()
-    {
+    {   if(Schema::hasTable('results')) return;
         Schema::table('results', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
 
