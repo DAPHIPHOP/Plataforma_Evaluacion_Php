@@ -8,7 +8,10 @@ Route::get('/', function () {
 // User
 Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
 
+    Route::get('req03', 'Req03Controller@index')->name('req03');
     Route::get('home', 'HomeController@redirect');
+    Route::get('recfacial', 'RecfacialController@index')->name('recfacial');
+    Route::post('recfacial', 'RecfacialController@reco')->name('recfacial.reco');
     Route::get('dashboard', 'HomeController@index')->name('home');
     Route::get('change-password', 'ChangePasswordController@create')->name('password.create');
     Route::post('change-password', 'ChangePasswordController@update')->name('password.update');
@@ -63,8 +66,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //BLOCAPP
     Route::get('blocapp', 'BlocappController@index')->name('blocapp');
     Route::get('blocapp-results', 'BlocappController@results')->name('blocappresults');
-    //Route::resource('resultsb', 'BlocappController@results'); 
+    //Route::resource('resultsb', 'BlocappController@results');
 
 //    Route::get('/admin/blocapp', function () {
 //        return view('blocapp.index');
+    Route::post('recognitions/req05', 'RecognitionController@recognitions')->name('recognitions');
+    Route::get('recognitions/req05', 'RecognitionController@req05')->name('recognitions.req05');
+    Route::delete('recognitions/req05/{id}', 'RecognitionController@destroy')->name('recognitions.destroy');
 });

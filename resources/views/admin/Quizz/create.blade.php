@@ -33,7 +33,12 @@
                     Nueva pregunta
                 </button>
                 <hr>
-                <div class="row d-none">
+                <div class="card col-12" id="q-container">
+                    <div class="card-body">
+
+                    </div>
+                  </div>
+                <div class="row preguntas " id="preguntas">
                     <div class="card col-12">
                         <div class="card-body">
 
@@ -68,9 +73,10 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                    <div id="copy" class="col-12 container">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Pregunta</label>
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" id="nombre"></textarea>
 
 
                         </div>
@@ -78,39 +84,68 @@
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
                                 value="option1" checked>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="opt1">
                         </div>
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
                                 value="option1">
 
-                                <input type="text" class="form-control">
-
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                value="option1">
-
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="opt1">
 
                         </div>
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
                                 value="option1">
 
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" id="opt1">
 
                         </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                value="option1">
+
+                                <input type="text" class="form-control" id="opt1">
+
+                        </div>
+
+                    </div>
+
 
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Agregar</button>
+                    <button type="button" class="btn btn-success" id="addquestion">Agregar</button>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        jQuery(function($) {
+            $("#addquestion").click(function(e) {
+
+                e.preventDefault();
+
+                var cantidad = $(".clone").length + 1;
+                var cloned = $("#copy:first").clone(true);
+
+                inpt_nombre=cloned.find('#nombre').attr('name', 'pregunta'+cantidad)
+
+                cloned.addClass('mt-4');
+
+                cloned.appendTo('#preguntas');
+               // cloned.find('.p:first').html('Pregunta ' + cantidad);
+                //cloned.find('.r:first').html('Respuesta ' + cantidad);
+                // cloned.find('#checkbox-respuesta').attr('name', 'respuesta'+cantidad);
+
+            });
+        })
+
+
+    </script>
 
 @endsection

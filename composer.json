@@ -8,7 +8,12 @@
     ],
     "license": "MIT",
     "require": {
+<<<<<<< HEAD
         "php": "^7.3|^8.0",
+=======
+        "php": "^7.2",
+        "aws/aws-sdk-php": "^3.181",
+>>>>>>> fa33cc55ce66e0aa3f7decdf61cdd4f0cf57b74b
         "barryvdh/laravel-dompdf": "^0.8.5",
         "bugsnag/bugsnag-laravel": "^2.17",
         "doctrine/dbal": "^2.9",
