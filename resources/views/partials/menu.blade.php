@@ -26,6 +26,16 @@
 
 
 
+                <li class="nav-item">
+                    <a href="{{ route("admin.blocapp") }}" class="nav-link {{ request()->is('admin/blocapp/index') || request()->is('admin/blocapp/index*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-trophy nav-icon">
+                        </i>
+                        BlocApp
+                    </a>
+                </li>
+
+                
+
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
@@ -34,6 +44,8 @@
                     {{ trans('global.logout') }}
                 </a>
             </li>
+
+            
         </ul>
 
     </nav>

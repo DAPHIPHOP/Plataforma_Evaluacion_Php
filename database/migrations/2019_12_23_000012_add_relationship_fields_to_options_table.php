@@ -8,6 +8,7 @@ class AddRelationshipFieldsToOptionsTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('options')) return;
         Schema::table('options', function (Blueprint $table) {
             $table->unsignedInteger('question_id');
 

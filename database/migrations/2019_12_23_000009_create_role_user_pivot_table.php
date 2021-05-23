@@ -8,6 +8,7 @@ class CreateRoleUserPivotTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('role_user')) return;
         Schema::create('role_user', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
 

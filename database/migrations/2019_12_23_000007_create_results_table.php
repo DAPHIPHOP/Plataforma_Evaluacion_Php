@@ -8,6 +8,8 @@ class CreateResultsTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('results')) return;
+
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
 

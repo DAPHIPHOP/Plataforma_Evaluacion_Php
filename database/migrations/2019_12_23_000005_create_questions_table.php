@@ -8,6 +8,7 @@ class CreateQuestionsTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('questions')) return;
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
 
