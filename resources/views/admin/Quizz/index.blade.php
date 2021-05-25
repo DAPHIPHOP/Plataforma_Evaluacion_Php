@@ -46,6 +46,9 @@
                                 {{ $quiz->name ?? '' }}
                             </td>
                             <td>
+                                {{ $quiz->duration }} minutos
+                            </td>
+                            <td>
 
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.categories.show', $quiz->id) }}">
                                       Ver

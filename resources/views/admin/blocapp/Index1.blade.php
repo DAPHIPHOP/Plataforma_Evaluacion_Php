@@ -19,13 +19,13 @@
                     
                     
                     <tbody>
-                        @foreach($evaluacions as $evaluacions)
+                        @foreach($evaluacions as $evaluacion)
                             <tr>
-                                <td>{{ $evaluacions->idEvalu}}</td>
-                                <td>{{ $evaluacions->nombreEvalu}}</td>
+                                <td>{{ $evaluacion->id}}</td>
+                                <td>{{ $evaluacion->name}}</td>
                                 <td>
                                     <a href="{{route('admin.blocappresults')}}" class="btn btn-info">Ver alumnos</a>
-                
+                {{ $evaluacion->students }}
                                 </td>
                             </tr>
                         @endforeach
