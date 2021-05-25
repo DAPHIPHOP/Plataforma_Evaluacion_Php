@@ -16,8 +16,8 @@ class RecfacialController extends Controller
 
         $args = [
             'credentials' => [
-                'key' => 'AKIA3JO47CFF734ZV6B7',
-                'secret' => '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',
+                'key' => '',
+                'secret' => '',
             ],
             'region' => 'us-east-1',
             'version' => 'latest'
