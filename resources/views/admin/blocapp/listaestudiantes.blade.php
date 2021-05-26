@@ -9,7 +9,7 @@
                 </div>
 
                 <table class="table table-dark table-striped mt-4 text-center ">
-                    
+
                     <thead>
                         <tr>
                             <th hidden scope="col">ID ALUMNO</th>
@@ -26,25 +26,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $users)
+                        @foreach($quizz->students as $student)
                         <tr>
-                            <td hidden>{{ $users->id}}</td>
-                                <td>{{ $users->name}}</td>
-                                <td>{{ $users->apellidos}}</td>
-                                <td>{{ $users->email}}</td>
-                                <td hidden>{{ $users->email_verified_at}}</td>
-                                <td hidden>{{ $users->password}}</td>
-                                <td hidden>{{ $users->remember_token}}</td>
-                                
+                            <td>{{ $student->alumno->user->name}}</td>
+                                <td>
+                                @foreach ($student->aplicaciones as $app)
+                                <li>{{$app->nombreAppList}}</li>
+
+                                @endforeach
+                                </td>
+                                <td>{{$student->direcciones->direccionIP}}</td>
+                                <td>{{$student->direcciones->direccionMAC}}</td>
+                                <td hidden></td></td>
+                                <td hidden></td>
+                                <td hidden></td>
+
                         </tr>
                         @endforeach
 
-                        
-                        
+
+
                     </tbody>
                 </table
 
-                    
+
                 </div>
             </div>
         </div>

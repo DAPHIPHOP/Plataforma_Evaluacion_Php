@@ -15,7 +15,7 @@ class QuizzController extends Controller
      */
     public function index()
     {
-        $quizzes=Quizz::all();
+        $quizzes=Quizz::all();  // selct ¨from quizz
         return view('admin.quizz.index', ['quizzes' => $quizzes]);
     }
 
@@ -75,7 +75,7 @@ class QuizzController extends Controller
     public function update(Request $request, $id)
     {
         $quizz=Quizz::findOrFail($id);
-        $quizz->update($request->all());
+        $quizz->update($request->all()); //update campo1 , campo , camp2 set campo1 actu, campo actu where quizz.id =1
 
         return redirect()->route('admin.quizz.edit',['quizz'=>$quizz]);
     }
@@ -88,6 +88,7 @@ class QuizzController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quizz=Quizz::find($id);
+        $quizz->delete(); //delete from  quizz where quiz.id = 1
     }
 }
