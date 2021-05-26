@@ -12,34 +12,32 @@
 
                     <thead>
                         <tr>
-                            <th hidden scope="col">ID ALUMNO</th>
-                            <th scope="col">NOMBRE</th>
-                            <th scope="col">APELLIDOS</th>
-                            <th scope="col">EMAIL</th>
-                            <th hidden scope="col">EMAILVERIFIED</th>
-                            <th hidden scope="col">PASSWORD</th>
-                            <th hidden scope="col">REMEMBER_TOKEN</th>
-                            <th hidden scope="col">idDirecciones</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
                             <th scope="col">DireccionIP</th>
                             <th scope="col">DireccionMAC</th>
-                            <th hidden scope="col">idAlumno</th>
+                            <th scope="col">Lista de Aplicaciones</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($quizz->students as $student)
                         <tr>
+                            <td>{{ $student->alumno->user->dni}}</td>
                             <td>{{ $student->alumno->user->name}}</td>
-                                <td>
+                            <td>{{ $student->alumno->user->apellidos}}</td>
+                            <td>{{$student->direcciones->direccionIP}}</td>
+                            <td>{{$student->direcciones->direccionMAC}}</td>
+                               {{--   <td>
+                                    <a href="{{route('admin.blocappresultsapps')}}" class="btn btn-info">Ver Aplicaciones</a>
+                                </td>  --}}
+                                  <td>
                                 @foreach ($student->aplicaciones as $app)
                                 <li>{{$app->nombreAppList}}</li>
 
                                 @endforeach
-                                </td>
-                                <td>{{$student->direcciones->direccionIP}}</td>
-                                <td>{{$student->direcciones->direccionMAC}}</td>
-                                <td hidden></td></td>
-                                <td hidden></td>
-                                <td hidden></td>
+                                </td>  
 
                         </tr>
                         @endforeach
