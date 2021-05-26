@@ -24,6 +24,7 @@ class Option extends Model
         'deleted_at',
         'question_id',
         'option_text',
+        'is_answer'
     ];
 
     public function question()
