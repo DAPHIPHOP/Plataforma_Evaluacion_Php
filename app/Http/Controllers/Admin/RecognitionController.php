@@ -37,6 +37,7 @@ class RecognitionController extends Controller
 
     public function recognitions(Request $request){
         $recognition = DB::table('recognitions')->where('id_usuario',$request->id)->get();
+        //$recognition->created_at = date_format($recognition->created_at,"d/m/Y h:i:s");
         return $recognition;
     }
 

@@ -70,7 +70,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 //    Route::get('/admin/blocapp', function () {
 //        return view('blocapp.index');
-    Route::post('recognitions/req05', 'RecognitionController@recognitions')->name('recognitions');
-    Route::get('recognitions/req05', 'RecognitionController@req05')->name('recognitions.req05');
-    Route::delete('recognitions/req05/{id}', 'RecognitionController@destroy')->name('recognitions.destroy');
+Route::post('recognitions/req05', 'RecognitionController@recognitions')->name('recognitions');
+    
+Route::get('recognitions/req05', 'RecognitionController@req05')->name('recognitions.req05');
+Route::delete('recognitions/req05/{id}', 'RecognitionController@destroy')->name('recognitions.destroy');
 });

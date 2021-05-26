@@ -16,8 +16,8 @@ class RecfacialController extends Controller
 
         $args = [
             'credentials' => [
-                'key' => '',
-                'secret' => '',
+                'key' => 'AKIA3JO47CFF734ZV6B7',
+                'secret' => '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',
             ],
             'region' => 'us-east-1',
             'version' => 'latest'
@@ -26,7 +26,7 @@ class RecfacialController extends Controller
             $client = new \Aws\Rekognition\RekognitionClient($args);
 
             $result = $client->compareFaces([
-                'SimilarityThreshold' => 90,
+                'SimilarityThreshold' => 50,
                 'SourceImage' => [
                     'Bytes' => base64_decode(auth()->user()->image),
                     //'Bytes' => file_get_contents('images/Foto.jpg'),
@@ -49,6 +49,10 @@ class RecfacialController extends Controller
                 $recognition->image = $request->img_bytes;
 
                 $recognition->save();
+
+                $affected = DB::table('users')
+                ->where('id', auth()->user()->id)
+                ->update(['intentos' => ((auth()->user()->intentos)-1)]);
 
                 return json_encode(["val"=> $valor_redondeado,"href"=>"/req03"]);
 

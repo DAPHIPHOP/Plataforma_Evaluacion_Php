@@ -13,13 +13,15 @@
                 <h3 class="text-center">Resultado</h3>
             </div>
         
+            <h3 class="text-center mt-3">{{$user->name}}</h3>
+
             <div class="card-body">
                 
                 <div class="d-flex justify-content-between"><h4><strong>Grado de Similitud:</strong></h4> <h4>{{$recognition[0]->similarity}}%</h4></div>
                 
-                <div class="d-flex justify-content-between"><h4><strong>Intentos Restantes:</strong></h4> <h4>{{($recognition[0]->attempt)-1}}</h4></div>
+                <div class="d-flex justify-content-between"><h4><strong>Intentos Restantes:</strong></h4> <h4>{{$user->intentos}}</h4></div>
                 
-                <div class="d-flex justify-content-between"><h4><strong>Fecha y Hora:</strong></h4> <h4>{{$recognition[0]->updated_at}}</h4></div>
+                <div class="d-flex justify-content-between"><h4><strong>Fecha y Hora:</strong></h4> <h4>{{date_format($recognition[0]->updated_at,"d/m/Y h:i:s")}}</h4></div>
             
                 
 
@@ -40,7 +42,7 @@
                 @endif
             @else
                 <div class="alert alert-danger mx-4" role="alert">
-                    <strong>Alerta!</strong> Terminó los intentos disponibles, solicite el acceso a su docente.
+                    <strong>Alerta!</strong> Terminó los intentos disponibles, Despues de este intento tiene que solicitar el acceso a su docente.
                 </div>
                 <div class="d-flex justify-content-between py-3 px-5">
                     <div class="bg-red p-2">Validación Fallida</div>

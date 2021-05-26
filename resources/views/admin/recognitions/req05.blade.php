@@ -110,9 +110,9 @@
                                               '<p class="card-text">'+
                                                 'Grado de Similitud: '+element.similarity+'%'+
                                                 '<br>'+
-                                                'Intento: '+element.attempt+ 
+                                                'Intento: '+ (4 - element.attempt) + 
                                                 '<br>'+
-                                                'Fecha y Hora: '+element.created_at+
+                                                'Fecha y Hora: '+ (new Date(element.created_at)).toLocaleDateString()+
                                               '</p>'+
                                             '</div>'+
                                           '</div>'+
