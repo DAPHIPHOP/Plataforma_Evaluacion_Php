@@ -28,8 +28,14 @@ class Quizz extends Model
         'deleted_at',
     ];
 
+
     public function quizzQuestions()
     {
         return $this->hasMany(Question::class, 'quizz_id', 'id');
+    }
+
+      public function students()
+    {
+        return $this->hasMany(QuizzStudent::class, 'quizz_id', 'id');
     }
 }

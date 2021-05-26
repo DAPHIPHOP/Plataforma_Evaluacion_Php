@@ -8,6 +8,7 @@ class CreateQuestionResultPivotTable extends Migration
 {
     public function up()
     {
+        if(Schema::hasTable('question_result')) return;
         Schema::create('question_result', function (Blueprint $table) {
             $table->unsignedInteger('result_id');
 

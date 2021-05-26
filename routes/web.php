@@ -1,11 +1,13 @@
 <?php
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 // User
 Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
+
     Route::get('req03', 'Req03Controller@index')->name('req03');
     Route::get('home', 'HomeController@redirect');
     Route::get('recfacial', 'RecfacialController@index')->name('recfacial');
@@ -13,10 +15,13 @@ Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
     Route::get('dashboard', 'HomeController@index')->name('home');
     Route::get('change-password', 'ChangePasswordController@create')->name('password.create');
     Route::post('change-password', 'ChangePasswordController@update')->name('password.update');
+
+
     Route::get('start-test', 'TestsController@start')->name('starttest');
+    Route::post('check-marqueds/{id}', 'TestsController@checkMarqueds')->name('checkMarqueds');
     Route::get('test', 'TestsController@index')->name('test');
     Route::post('test', 'TestsController@store')->name('test.store');
-    Route::get('finish-exam/{id}','TestsController@finish')->name('test.finish');
+    Route::get('finish-exam/{id}', 'TestsController@finish')->name('test.finish');
     Route::get('results/{result_id}', 'ResultsController@show')->name('results.show');
     Route::get('send/{result_id}', 'ResultsController@send')->name('results.send');
 });
@@ -33,6 +38,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Roles
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
+
+
+
+    Route::resource('quizz', 'QuizzController');
 
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
@@ -54,6 +63,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('results/destroy', 'ResultsController@massDestroy')->name('results.massDestroy');
     Route::resource('results', 'ResultsController');
 
+    //BLOCAPP
+    Route::get('blocapp', 'BlocappController@index')->name('blocapp');
+    Route::get('blocapp-results', 'BlocappController@results')->name('blocappresults');
+    //Route::resource('resultsb', 'BlocappController@results');
+
+//    Route::get('/admin/blocapp', function () {
+//        return view('blocapp.index');
     Route::post('recognitions/req05', 'RecognitionController@recognitions')->name('recognitions');
     Route::get('recognitions/req05', 'RecognitionController@req05')->name('recognitions.req05');
     Route::delete('recognitions/req05/{id}', 'RecognitionController@destroy')->name('recognitions.destroy');
