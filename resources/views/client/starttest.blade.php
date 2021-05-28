@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 bg-white border rounded border-info shadow-lg ">
-            <form class="mt-5 mb-5" id="form" name="form" action="{{ route('client.test') }}">
+            <form class="mt-5 mb-5" id="form" name="form" action="{{ route('client.recfacial') }}" method="GET">
                 @csrf
                 <div class="form-group justify-content-center ">
                     <p class="text-center font-weight-bold">

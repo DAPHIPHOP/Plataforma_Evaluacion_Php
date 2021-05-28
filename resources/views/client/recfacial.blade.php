@@ -6,9 +6,10 @@
     <div class="col-sm-6 mx-auto">
 
         <h4 class="text-center font-weight-bold">CAPTURE SU ROSTRO EN EL RECUADRO</h4>
-
+        <h4 class="text-center font-weight-bold">Codigo de Evaluación: {{$id}}</h4>
         <form method="" action="" id="id_form">
         @csrf
+        <input type="hidden" id="id_evaluacion" value="{{$id}}">
           <div class="row">
             <div class="video">
                 <video id="videoweb" src="" height="400px" width="100%"></video>
@@ -85,7 +86,8 @@
                 url: "{{URL::to('recfacial')}}",
                 data: {
                     "_token": document.getElementsByName('_token')[0].value,
-                    "img_bytes": inp_hidden.value
+                    "img_bytes": inp_hidden.value,
+                    "id_evaluacion":{{$id}}
                 },
                 dataType: "json",
                 method: "POST",

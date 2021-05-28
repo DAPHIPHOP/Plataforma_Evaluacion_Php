@@ -32,7 +32,11 @@
                 @if ($recognition[0]->similarity>90)
                     <div class="d-flex justify-content-between py-3 px-5">
                         <div class="bg-green p-2">Validación Exitosa</div>
-                        <a class="btn btn-primary" href="/dashboard">Continuar</a>
+                        <form action="{{ route('client.test') }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$recognition[0]->id_evaluacion}}">
+                            <button class="btn btn-primary" type="submit">Continuar</button>
+                        </form>
                     </div>
                 @else
                     <div class="d-flex justify-content-between py-3 px-5">
