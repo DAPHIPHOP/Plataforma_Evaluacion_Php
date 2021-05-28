@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //BLOCAPP
     Route::get('blocapp', 'BlocappController@index')->name('blocapp');
     Route::get('blocapp-results/{id}', 'BlocappController@results')->name('blocappresults');
+    Route::get('blocapp-apps/', 'BlocappController@resultsapps')->name('blocappresultsapps');
     //Route::resource('resultsb', 'BlocappController@results');
 
 //    Route::get('/admin/blocapp', function () {

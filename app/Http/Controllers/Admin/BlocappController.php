@@ -19,9 +19,19 @@ class BlocappController extends Controller
     {
         $quizz=Quizz::find($id);
         $users = user::all();
-        //return view('admin\blocapp\listaestudiantes')-> with('users',$users);           //cambie index por index1
+       
 
         $direcciones = direcciones::all();
-        return view('admin\blocapp\listaestudiantes',['quizz'=>$quizz])-> with('users', $users, 'direcciones', $direcciones,'quizz',$quizz);           //cambie index por index1
+        return view('admin\blocapp\listaestudiantes',['quizz'=>$quizz])-> with('users', $users, 'direcciones', $direcciones,'quizz',$quizz);                 //cambie index por index1
+    }
+
+    public function resultsapps()
+    {
+        //$quizz=Quizz::find();
+        //$users = user::all();
+        
+
+       // $direcciones = direcciones::all();
+        return view('admin\blocapp\listaapp');                 //cambie index por index1
     }
 }
