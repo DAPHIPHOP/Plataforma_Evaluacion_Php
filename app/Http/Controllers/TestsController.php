@@ -13,15 +13,27 @@ use Illuminate\Http\Request;
 
 class TestsController extends Controller
 {
-
     public function start()
     {
         return view('client.starttest');
     }
     public function index(Request $request)
     {
-
         $quizz = Quizz::findOrFail($request->id);
+        $now= Carbon::now();
+
+        $antes=$now->isBefore($quizz->disp_from);
+        $despues=$now->isAfter($quizz->disp_to);
+
+        if ($antes) {
+            return view('client.testerror',['error'=>'antes','quizz'=>$quizz]);
+        }
+
+        if ($despues) {
+            return view('client.testerror',['error'=>'despues','quizz'=>$quizz]);
+        }
+
+
 
         $questions = Question::whereQuizzId($quizz->id)->inRandomOrder()->get();
 
@@ -68,7 +80,6 @@ class TestsController extends Controller
 
         $quizz_student = QuizzStudent::where(['quizz_id' => $quizz->id, 'student_id' => $student->id])->first();
         if ($quizz_student->estado != 'Finalizado') {
-
             $anser_student = QuestionResult::updateOrCreate(
                 ['quizz_id' => $quizz_student->id, 'question_id' => $question->id],
                 ['option_id' => $option_marqued->id, 'points' => $points]
@@ -110,12 +121,10 @@ class TestsController extends Controller
             }
         }
 
-        if(count($noMarqueds)>=1){
+        if (count($noMarqueds)>=1) {
             return response()->json(['sinMarcar' => $noMarqueds,'success'=>false]);
-        }else{
-           return response()->json(['success'=>true]);
+        } else {
+            return response()->json(['success'=>true]);
         }
-
-
     }
 }
