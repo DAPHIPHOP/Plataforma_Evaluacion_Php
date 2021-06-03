@@ -114,7 +114,42 @@
     </div>
 
 
-    @endsection
+
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Reconocimiento Facial</h5>
+            </div>
+            <div class="modal-body">
+                <div class="content mx-4">
+                    <h4 class="text-center font-weight-bold">Vuelva a Capturar su Rostro</h4>
+      
+                      <form method="" action="" id="id_form">
+                      @csrf
+                      <div class="row">
+                          <div class="video">
+                              <video id="videoweb" src="" height="" width="100%"></video>
+                          </div>
+                      </div>
+                      <div class="row justify-content-center">
+                              <button class="btn btn-light shadow" type="button" onclick="tomar_foto()" id="botontomar"><h4 class="font-weight-bold" style="margin-bottom: -2px;"><i class="fas fa-play-circle mr-2 text-primary"></i>Iniciar</h4></button>
+                          </div>
+                          <canvas id="canvasimagen" style="height: 400px;display:none;"></canvas>
+                          <input type="hidden" name="imgbyte" id="imgbyte">
+                              
+                      </form>
+                    <h4 class="text-center font-weight-bold" id="cont_modal">Espere el Resultado</h4>
+                </div>
+              
+            </div>
+             
+          </div>
+        </div>
+      </div>
+      
+@endsection
+      
 @section('script')
 <script type="text/javascript" src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js">
 </script>
@@ -235,6 +270,77 @@
         });
 
     }
+
+
+    var video;
+    document.addEventListener("DOMContentLoaded", function(event){
+      
+                  var promesa = navigator.mediaDevices.getUserMedia({video:true});
+                  
+                  promesa.then(capturados);
+                  promesa.catch(errorcapturados);
+      
+              
+      
+                  function capturados(e){
+                      video = document.getElementById("videoweb");
+                      video.srcObject = e;
+                      video.play();
+                      
+                  }
+                  function errorcapturados(e){
+                      console.log("error al capturar la pantalla");
+                  }
+      
+              });
+      
+              setTimeout(() => {
+                  $('#staticBackdrop').modal('show');
+              }, 5000);
+      
+              function tomar_foto(){
+                  //$('#staticBackdrop').modal('hide');
+                  var canvas = document.getElementById("canvasimagen");
+                  var contexto = canvas.getContext("2d");
+                  canvas.width = video.videoWidth;
+                  canvas.height = video.videoHeight;
+                  contexto.drawImage(video,0,0,video.videoWidth,video.videoHeight);
+                  //window.location="{{URL::to('test')}}";
+                  var img_byte = canvas.toDataURL('image/jpeg',1.0);
+                  var coma = img_byte.indexOf(",");
+                  var byte = img_byte.substring(coma+1,img_byte.length);
+                  var inp_hidden = document.getElementById("imgbyte");
+                  inp_hidden.value = byte;
+                  //console.log(inp_hidden.value);
+                  var form = document.getElementById("id_form");
+      
+                  var param = new FormData(form);
+      
+                  var cont_modal = document.getElementById("cont_modal");
+                  //var modal = document.getElementById("modal_mensaje");
+                  $.ajax({
+                      url: "{{URL::to('recfacial')}}",
+                      data: {
+                          "_token": $("meta[name='csrf-token']").attr("content"),
+                          "img_bytes": inp_hidden.value
+                      },
+                      dataType: "json",
+                      method: "POST",
+                      success: function(response) {
+                          
+                          cont_modal.innerHTML = "Resultado de Similitud: " + parseInt(response.val,10);
+
+                          setTimeout(() => {
+                            $('#staticBackdrop').modal('hide');
+                            }, 1000);
+                          
+                      },
+                      error: function (error) {
+                          JSON.stringify(error);
+                      }
+                  });
+      
+              }
 
 </script>
 @endsection
