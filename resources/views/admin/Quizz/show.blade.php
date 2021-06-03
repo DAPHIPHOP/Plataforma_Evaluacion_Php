@@ -1,46 +1,72 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.category.title') }}
-    </div>
+    <div class="card">
+        <div class="card-header">
+             <b>Evaluacion : </b> {{$quizz->name}}
+        </div>
 
-    <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.categories.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
+        <div class="card-body">
+            <table class="table table-bordered">
+
                 <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.category.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $category->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.category.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $category->name }}
-                        </td>
-                    </tr>
+                  <tr>
+                    <th scope="row">Disponible desde</th>
+                    <td>{{$quizz->disp_from}}</td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">Disponible hasta</th>
+                    <td>{{$quizz->disp_to}}</td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">Duracion</th>
+                    <td>{{$quizz->duration}}</td>
+
+                  </tr>
                 </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.categories.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
+              </table>
+            <form method="POST" action="{{ route('admin.quizz.update', ['quizz' => $quizz]) }}"
+                enctype="multipart/form-data">
+                @csrf
+                @method('Put')
+
+
+                <div class="col preguntas " id="preguntas">
+                    @foreach ($quizz->quizzQuestions as $question)
+                        <div id="copy" class="card col-12 container mb-5">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Pregunta {{$loop->iteration}}</label>
+                                <textarea class="form-control" id="nombre">{{ $question->question_text }}</textarea>
+
+
+                            </div>
+                            <p>Opciones</p>
+                            @foreach ($question->questionOptions as $option)
+                            @php
+                                $is_answer='';
+                                if($option->is_answer==1){
+                                    $is_answer='checked';
+                                }
+                            @endphp
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" id="ans1" value="0"  name="ans{{$question->id}}" {{$is_answer}}>
+                                    <input type="text" class="form-control" id="opt1" value="{{$option->option_text}}">
+                                </div>
+                            @endforeach
+
+
+
+
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </form>
         </div>
     </div>
-</div>
 
 
 

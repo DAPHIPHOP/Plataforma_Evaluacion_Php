@@ -46,6 +46,6 @@ class QuizzStudent extends Model
 
     public function direcciones()
     {
-        return $this->hasOne(direcciones::class,'id_quizz_alumno');
+        return $this->hasOne(direcciones::class,'id_quizz_alumno')->withDefault();
     }
 }

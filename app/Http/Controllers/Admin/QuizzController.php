@@ -17,7 +17,7 @@ class QuizzController extends Controller
      */
     public function index()
     {
-        $quizzes=Quizz::all();  // selct ¨from quizz
+        $quizzes=Quizz::all()->sortByDesc('id');  // selct ¨from quizz
         return view('admin.quizz.index', ['quizzes' => $quizzes]);
     }
 
@@ -54,8 +54,6 @@ class QuizzController extends Controller
             $answer=$request->$st2;
             $options=$request->$st;
             foreach ($options as $key=>$option) {
-
-
                 $opt=new Option();
                 $opt->option_text=$option;
                 $opt->question_id=$question->id;
@@ -79,7 +77,8 @@ class QuizzController extends Controller
      */
     public function show($id)
     {
-        //
+        $quizz=Quizz::find($id);
+        return view('admin.Quizz.show', ['quizz'=>$quizz]);
     }
 
     /**
