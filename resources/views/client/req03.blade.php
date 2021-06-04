@@ -28,7 +28,7 @@
             </div>
                 
             
-            @if ( (($recognition->attempt)-1) > 0 )
+            @if ( (($recognition->attempt)-1) > -1 )
                 @if ($recognition->similarity>90)
                     <div class="d-flex justify-content-between py-3 px-5">
                         <div class="bg-green p-2">Validación Exitosa</div>

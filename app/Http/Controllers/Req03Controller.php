@@ -49,6 +49,7 @@ class Req03Controller extends Controller
                 $valor_redondeado = round($array_result["FaceMatches"][0]["Similarity"]);
 
                 $recognition = $this->func_recognition($request,$valor_redondeado);
+                $this->desc_intents();
                 $user = auth()->user();
                 $id_evaluacion = $request->id_evaluacion;
 
@@ -81,7 +82,6 @@ class Req03Controller extends Controller
                 $affected = DB::table('users')
                 ->where('id', auth()->user()->id)
                 ->update(['intentos' => ((auth()->user()->intentos)-1)]);
-                return $affected;
     }
     
 }
