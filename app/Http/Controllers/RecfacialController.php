@@ -52,10 +52,6 @@ class RecfacialController extends Controller
 
                 $recognition->save();
 
-                $affected = DB::table('users')
-                ->where('id', auth()->user()->id)
-                ->update(['intentos' => ((auth()->user()->intentos)-1)]);
-
                 return json_encode(["val"=> $valor_redondeado,"href"=>"/req03"]);
 
             }else{
@@ -71,10 +67,6 @@ class RecfacialController extends Controller
         
                 $recognition->save();
 
-                $affected = DB::table('users')
-                ->where('id', auth()->user()->id)
-                ->update(['intentos' => ((auth()->user()->intentos)-1)]);
-
                 return json_encode(["val"=>"0.00","href"=>"/req03"]);
             }
         } catch (\Throwable $th) {
@@ -87,10 +79,6 @@ class RecfacialController extends Controller
                 $recognition->id_evaluacion = $request->id;
 
                 $recognition->save();
-
-                $affected = DB::table('users')
-                ->where('id', auth()->user()->id)
-                ->update(['intentos' => ((auth()->user()->intentos)-1)]);
 
                 return json_encode(["val"=>"0.00","href"=>"/req03"]);
         }

@@ -7,9 +7,9 @@
 
         <h4 class="text-center font-weight-bold">CAPTURE SU ROSTRO EN EL RECUADRO</h4>
         <h4 class="text-center font-weight-bold">Codigo de Evaluación: {{$id}}</h4>
-        <form method="" action="" id="id_form">
+        <form method="POST" action="{{route('client.req03.reco')}}" id="id_form">
         @csrf
-        <input type="hidden" id="id_evaluacion" value="{{$id}}">
+        <input type="hidden" name="id_evaluacion" id="id_evaluacion" value="{{$id}}">
           <div class="row">
             <div class="video">
                 <video id="videoweb" src="" height="400px" width="100%"></video>
@@ -77,12 +77,13 @@
             inp_hidden.value = byte;
             //console.log(inp_hidden.value);
             var form = document.getElementById("id_form");
+            form.submit();
 
-            var param = new FormData(form);
+            //var param = new FormData(form);
 
-            var cont_modal = document.getElementById("cont_modal");
+            //var cont_modal = document.getElementById("cont_modal");
             //var modal = document.getElementById("modal_mensaje");
-            $.ajax({
+            /*$.ajax({
                 url: "{{URL::to('recfacial')}}",
                 data: {
                     "_token": document.getElementsByName('_token')[0].value,
@@ -100,7 +101,7 @@
                 error: function (error) {
                     JSON.stringify(error);
                 }
-            });
+            });*/
 
         }
 

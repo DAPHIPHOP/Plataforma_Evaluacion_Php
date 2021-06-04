@@ -9,6 +9,7 @@ Route::get('/', function () {
 Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
 
     Route::get('req03', 'Req03Controller@index')->name('req03');
+    Route::post('req03', 'Req03Controller@reco')->name('req03.reco');
     Route::get('home', 'HomeController@redirect');
     Route::get('recfacial', 'RecfacialController@index')->name('recfacial');
     Route::post('recfacial', 'RecfacialController@reco')->name('recfacial.reco');

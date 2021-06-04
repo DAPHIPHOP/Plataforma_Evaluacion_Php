@@ -5,7 +5,7 @@
 <div class="container d-flex align-items-center">
 
     <div class="col-sm-6 p-3">
-        <img width="100%" id="imagen_reconocida" src="" alt="" attr-img ="{{$recognition[0]->image}}">
+        <img width="100%" id="imagen_reconocida" src="" alt="" attr-img ="{{$recognition->image}}">
     </div>
     <div class="col-sm-6 p-2">
         <div class="card">
@@ -17,24 +17,24 @@
 
             <div class="card-body">
                 
-                <div class="d-flex justify-content-between"><h4><strong>Grado de Similitud:</strong></h4> <h4>{{$recognition[0]->similarity}}%</h4></div>
+                <div class="d-flex justify-content-between"><h4><strong>Grado de Similitud:</strong></h4> <h4>{{$recognition->similarity}}%</h4></div>
                 
                 <div class="d-flex justify-content-between"><h4><strong>Intentos Restantes:</strong></h4> <h4>{{$user->intentos}}</h4></div>
                 
-                <div class="d-flex justify-content-between"><h4><strong>Fecha y Hora:</strong></h4> <h4>{{date_format($recognition[0]->updated_at,"d/m/Y h:i:s")}}</h4></div>
+                <div class="d-flex justify-content-between"><h4><strong>Fecha y Hora:</strong></h4> <h4>{{date_format($recognition->updated_at,"d/m/Y h:i:s")}}</h4></div>
             
                 
 
             </div>
                 
             
-            @if ( (($recognition[0]->attempt)-1) > 0 )
-                @if ($recognition[0]->similarity>90)
+            @if ( (($recognition->attempt)-1) > 0 )
+                @if ($recognition->similarity>90)
                     <div class="d-flex justify-content-between py-3 px-5">
                         <div class="bg-green p-2">Validación Exitosa</div>
                         <form action="{{ route('client.test') }}">
                             @csrf
-                            <input type="hidden" name="id" value="{{$recognition[0]->id_evaluacion}}">
+                            <input type="hidden" name="id" value="{{$recognition->id_evaluacion}}">
                             <button class="btn btn-primary" type="submit">Continuar</button>
                         </form>
                     </div>
