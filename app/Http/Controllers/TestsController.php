@@ -51,6 +51,7 @@ class TestsController extends Controller
             return redirect()->route('client.test.finish', ['id' => $quizz_student->id]);
         }
         $marqueds = [];
+        $marquedsByStudent=[];
         foreach ($questions as $question) {
 
             //$marquedByStudent = $question->marquedsByStudent->first();

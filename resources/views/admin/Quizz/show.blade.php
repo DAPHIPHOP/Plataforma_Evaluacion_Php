@@ -11,17 +11,17 @@
 
                 <tbody>
                   <tr>
-                    <th scope="row">Disponible desde</th>
+                    <th scope="row" class="bg-info">Disponible desde</th>
                     <td>{{$quizz->disp_from}}</td>
 
                   </tr>
                   <tr>
-                    <th scope="row">Disponible hasta</th>
+                    <th scope="row" class="bg-info">Disponible hasta</th>
                     <td>{{$quizz->disp_to}}</td>
 
                   </tr>
                   <tr>
-                    <th scope="row">Duracion</th>
+                    <th scope="row" class="bg-info">Duracion</th>
                     <td>{{$quizz->duration}}</td>
 
                   </tr>
@@ -35,30 +35,48 @@
 
                 <div class="col preguntas " id="preguntas">
                     @foreach ($quizz->quizzQuestions as $question)
-                        <div id="copy" class="card col-12 container mb-5">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Pregunta {{$loop->iteration}}</label>
-                                <textarea class="form-control" id="nombre">{{ $question->question_text }}</textarea>
 
 
+                        <div class="card ">
+                            <div class="card-header">
+                                <p>{{ $question->question_text }}</p>
+                                <p class="text-info">{{ $question->points }} puntos.</p>
                             </div>
-                            <p>Opciones</p>
-                            @foreach ($question->questionOptions as $option)
-                            @php
-                                $is_answer='';
-                                if($option->is_answer==1){
-                                    $is_answer='checked';
-                                }
-                            @endphp
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" id="ans1" value="0"  name="ans{{$question->id}}" {{$is_answer}}>
-                                    <input type="text" class="form-control" id="opt1" value="{{$option->option_text}}">
-                                </div>
-                            @endforeach
 
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('client.test.store') }}"
+                                    id="form-create-{{ $question->id }}">
+                                    @csrf
 
+                                    @foreach ($question->questionOptions as $option)
+                                        @php
 
+                                            $checked = '';
+                                            $bg='';
+                                          if( $option->is_answer==1){
+                                                    $checked = 'checked';
+                                                    $bg='bg-success';
+                                                }
 
+                                        @endphp
+                                        <div class="form-check mb-3 {{$bg}}">
+                                            <input disabled  {{ $checked }} class="form-check-input" type="radio"
+                                                name="questions[{{ $question->id }}]" id="option-{{ $option->id }}"
+                                                value="{{ $option->id }}" @if (old("
+                                                questions.$question->id") == $option->id) checked @endif onChange="submitAnswer(this);">
+                                            <label class="form-check-label" for="option-{{ $option->id }}">
+                                                {{ $option->option_text }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+
+                                    @if ($errors->has(" questions.$question->id"))
+                                        <span style="margin-top: .25rem; font-size: 80%; color: #e3342f;" role="alert">
+                                            <strong>{{ $errors->first("questions.$question->id") }}</strong>
+                                        </span>
+                                    @endif
+                                </form>
+                            </div>
                         </div>
                     @endforeach
 
