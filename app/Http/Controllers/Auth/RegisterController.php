@@ -70,11 +70,15 @@ class RegisterController extends Controller
             $base64 = base64_encode(file_get_contents($imagen));
         }
         //return $data;
-       return User::create([
+      $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'image' => $base64,
         ]);
+
+        $user->alumno()->create();
+
+        return $user;
     }
 }
