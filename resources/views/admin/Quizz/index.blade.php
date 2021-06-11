@@ -35,6 +35,7 @@
                             Disponible hasta
                              </th>
                         <th>Duracion</th>
+                        <th>Resultados</th>
                         <th>
                             &nbsp;
                         </th>
@@ -58,15 +59,16 @@
                             <td>
                                 {{ $quiz->duration }} minutos
                             </td>
+                            <td><a class="btn btn-warning" href="{{route('admin.quizz.result',['id'=>$quiz])}}">Resultados</a></td>
                             <td>
 
 
 
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.quizz.show', $quiz->id) }}">
+                                <a class="btn  btn-success" href="{{ route('admin.quizz.show', $quiz->id) }}">
                                    Ver
                                 </a>
 
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.quizz.edit', $quiz->id) }}">
+                                    <a class="btn  btn-info" href="{{ route('admin.quizz.edit', $quiz->id) }}">
                                         Editar
                                     </a>
 

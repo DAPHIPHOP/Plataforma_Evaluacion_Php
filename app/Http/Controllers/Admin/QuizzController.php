@@ -105,6 +105,27 @@ class QuizzController extends Controller
         $quizz=Quizz::findOrFail($id);
         $quizz->update($request->all()); //update campo1 , campo , camp2 set campo1 actu, campo actu where quizz.id =1
 
+        foreach ($request->question as $question) {
+            $inpt_text='text-'.$question;
+            $inpt_ans='ans-'.$question;
+            $actual_question=Question::find($question);
+            $actual_question->question_text=$request->$inpt_text;
+            $actual_question->save();
+
+            $options=$actual_question->questionOptions;
+            $ans_opt=$request->$inpt_ans;
+            foreach ($options as $option) {
+                $inpt_opt='opt-'.$option->id;
+                $option->option_text=$request->$inpt_opt;
+                $option->is_answer=($ans_opt==$option->id)? 1:0;
+                $option->save();
+                # code...
+            }
+
+            //dd($request->request,$actual_question);
+        }
+
+
         return redirect()->route('admin.quizz.edit', ['quizz'=>$quizz]);
     }
 
@@ -118,5 +139,11 @@ class QuizzController extends Controller
     {
         $quizz=Quizz::find($id);
         $quizz->delete(); //delete from  quizz where quiz.id = 1
+    }
+
+    public function results($id)
+    {
+        $quizz=Quizz::find($id);
+        return view('admin.Quizz.results', ['quizz'=>$quizz]);
     }
 }

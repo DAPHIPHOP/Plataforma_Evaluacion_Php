@@ -34,10 +34,11 @@
 
                 <div class="col preguntas " id="preguntas">
                     @foreach ($quizz->quizzQuestions as $question)
-                        <div id="copy" class="card col-12 container mb-5">
+                        <div  class="card col-12 container mb-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Pregunta</label>
-                                <textarea class="form-control" id="nombre">{{ $question->question_text }}</textarea>
+                                <input type="hidden" value="{{$question->id}}" name="question[]">
+                                <textarea class="form-control" name="text-{{$question->id}}">{{ $question->question_text }}</textarea>
 
 
                             </div>
@@ -50,8 +51,8 @@
                                 }
                             @endphp
                                 <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio" id="ans1" value="0"  name="ans{{$question->id}}" {{$is_answer}}>
-                                    <input type="text" class="form-control" id="opt1" value="{{$option->option_text}}">
+                                    <input class="form-check-input" type="radio" id="ans1" value="{{$option->id}}"  name="ans-{{$question->id}}" {{$is_answer}}>
+                                    <input type="text" class="form-control" name="opt-{{$option->id}}" value="{{$option->option_text}}">
                                 </div>
                             @endforeach
 
