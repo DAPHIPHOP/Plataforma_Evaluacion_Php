@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 // User
-Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
+Route::group(['as' => 'client.', 'middleware' => ['auth','alumno']], function () {
 
     Route::get('req03', 'Req03Controller@index')->name('req03');
     Route::post('req03', 'Req03Controller@reco')->name('req03.reco');
@@ -30,7 +30,7 @@ Route::group(['as' => 'client.', 'middleware' => ['auth']], function () {
 Auth::routes();
 // Admin
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth','admin']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('quizz', 'QuizzController');
     Route::get('quizz-result/{id}','QuizzController@results')->name('quizz.result');
+    Route::resource('reporte', 'ReporteController');
 
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');

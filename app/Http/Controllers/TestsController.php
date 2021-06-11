@@ -8,6 +8,7 @@ use App\Option;
 use App\Question;
 use App\QuizzStudent;
 use App\QuestionResult;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -58,6 +59,11 @@ class TestsController extends Controller
             $marquedsByStudent[] = $question->marquedsByStudent->where('quizz_id', $quizz_student->id)->first();
         }
 
+        //set active user
+        $user=User::find(auth()->user()->id)  ;
+        $user->estado=1;
+        $user->save();
+
 
 
         return view('client.test', ['questions' => $questions, 'marqueds' => $marquedsByStudent, 'intento' => $quizz_student]);
@@ -95,6 +101,10 @@ class TestsController extends Controller
 
     public function finish($id)
     {
+        //set active user
+        $user=User::find(auth()->user()->id)  ;
+        $user->estado=0;
+        $user->save();
         $quizz_student = QuizzStudent::findOrFail($id);
         if ($quizz_student->estado != 'Finalizado') {
             $quizz_student->estado = 'Finalizado';

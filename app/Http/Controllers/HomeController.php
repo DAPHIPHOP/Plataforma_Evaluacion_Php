@@ -23,8 +23,7 @@ class HomeController extends Controller
 
     public function redirect()
     {
-
-      if (auth()->user()->rol_id==1) {
+        if (auth()->user()->rol_id==1) {
             return redirect()->route('admin.home')->with('status', session('status'));
         }
 

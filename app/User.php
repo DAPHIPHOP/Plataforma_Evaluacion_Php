@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use App\Student;
+use App\Teacher;
 class User extends Authenticatable
 {
     use SoftDeletes, Notifiable, HasApiTokens;
@@ -82,6 +83,11 @@ class User extends Authenticatable
     public function alumno()
     {
         return $this->hasOne(Student::class,'user_id','id');
+    }
+
+    public function docente()
+    {
+        return $this->hasOne(Teacher::class,'user_id','id');
     }
 
     public function roles()

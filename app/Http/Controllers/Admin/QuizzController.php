@@ -137,8 +137,15 @@ class QuizzController extends Controller
      */
     public function destroy($id)
     {
-        $quizz=Quizz::find($id);
-        $quizz->delete(); //delete from  quizz where quiz.id = 1
+
+         try {
+            $quizz=Quizz::find($id);
+            $quizz->delete();
+            return response()->json(['message'=>'Evaluacion eliminada']);
+         } catch (\Throwable $th) {
+            return response()->json(['message'=>'No se puede eliminar esta evaluacion']);
+         }
+
     }
 
     public function results($id)
