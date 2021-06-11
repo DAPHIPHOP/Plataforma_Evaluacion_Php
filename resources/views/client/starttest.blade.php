@@ -16,7 +16,7 @@
                 <div class="form-check mt-5 mb-2">
                     <input class="form-check-input " id="exampleCheck1" type="checkbox" required="">
                         <a class="form-check-label font-weight-bold" data-target="#exampleModal" data-toggle="modal" for="exampleCheck1" href="#">
-                            Acepto los términos y condiciones
+                            Acepto los términos y condiciones (Descarga el BlocApp)
                         </a>
                     </input>
                 </div>
@@ -40,27 +40,19 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>El acceso al sitio web por parte del usuario, la utilización del contenido, productos y/o servicios implica estar de acuerdo con los terminos siguientes:</p>
+	                        <p>     1.El estudiante solo deberan usar el navegador Google Chrome para realizar un examen.</p>
+                            <p>     2.El estudiante acepta el tratamiendo de los datos que seran utilizados solo para este fin.</p>
+                            <p>     3.El estudiante deben contan con una camara para realiza un examen.</p>
+	                        <p>     4.El estudiante debe descargar el ejecutable BlocApp y ejecutarlo antes de un examen.</p>
+                            <p>Los datos ingresados por usuario  no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales.</p>
                         </div>
-                      {{--   <div class="modal-footer">
-                            <button class="btn btn-secondary" data-dismiss="modal" type="button">
-                                Close
-                            </button>
-                            <button class="btn btn-primary" type="button">
-                                Save changes
-                            </button>
-                        </div> --}}
+                         <div class="modal-footer">
+                            <a href="{{asset('BlocApp.exe')}}" class="btn btn-secondary" type="button">
+                                Aceptar
+                            </a>
+
+                        </div> 
                     </div>
                 </div>
             </div>
