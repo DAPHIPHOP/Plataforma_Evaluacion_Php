@@ -22,6 +22,7 @@ class Recognition extends Model
         'attempt',
         'similarity',
         'image',
+        'id_evaluacion',
         'created_at',
         'updated_at',
         'deleted_at',

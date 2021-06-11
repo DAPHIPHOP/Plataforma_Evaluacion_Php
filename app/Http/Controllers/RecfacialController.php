@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class RecfacialController extends Controller
 {
-    public function index(){
-        return view('client.recfacial');
+    public function index(Request $request){
+        $id = $request->id;
+        return view('client.recfacial', compact('id'));
     }
 
     public function reco(Request $request){
@@ -26,7 +27,7 @@ class RecfacialController extends Controller
             $client = new \Aws\Rekognition\RekognitionClient($args);
 
             $result = $client->compareFaces([
-                'SimilarityThreshold' => 90,
+                'SimilarityThreshold' => 50,
                 'SourceImage' => [
                     'Bytes' => base64_decode(auth()->user()->image),
                     //'Bytes' => file_get_contents('images/Foto.jpg'),
@@ -47,6 +48,7 @@ class RecfacialController extends Controller
                 $recognition->attempt = auth()->user()->intentos;
                 $recognition->similarity = $valor_redondeado;
                 $recognition->image = $request->img_bytes;
+                $recognition->id_evaluacion = $request->id_evaluacion;
 
                 $recognition->save();
 
@@ -61,11 +63,9 @@ class RecfacialController extends Controller
                 $recognition->attempt = auth()->user()->intentos;
                 $recognition->similarity = $valor_redondeado;
                 $recognition->image = $request->img_bytes;
+                $recognition->id_evaluacion = $request->id;
+        
                 $recognition->save();
-
-                $affected = DB::table('users')
-                ->where('id', auth()->user()->id)
-                ->update(['intentos' => ((auth()->user()->intentos)-1)]);
 
                 return json_encode(["val"=>"0.00","href"=>"/req03"]);
             }
@@ -76,12 +76,9 @@ class RecfacialController extends Controller
                 $recognition->attempt = auth()->user()->intentos;
                 $recognition->similarity = 0.00;
                 $recognition->image = $request->img_bytes;
+                $recognition->id_evaluacion = $request->id;
 
                 $recognition->save();
-
-                $affected = DB::table('users')
-                ->where('id', auth()->user()->id)
-                ->update(['intentos' => ((auth()->user()->intentos)-1)]);
 
                 return json_encode(["val"=>"0.00","href"=>"/req03"]);
         }

@@ -9,6 +9,7 @@ Route::get('/', function () {
 Route::group(['as' => 'client.', 'middleware' => ['auth','alumno']], function () {
 
     Route::get('req03', 'Req03Controller@index')->name('req03');
+    Route::post('req03', 'Req03Controller@reco')->name('req03.reco');
     Route::get('home', 'HomeController@redirect');
     Route::get('recfacial', 'RecfacialController@index')->name('recfacial');
     Route::post('recfacial', 'RecfacialController@reco')->name('recfacial.reco');
@@ -73,7 +74,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 //    Route::get('/admin/blocapp', function () {
 //        return view('blocapp.index');
-    Route::post('recognitions/req05', 'RecognitionController@recognitions')->name('recognitions');
-    Route::get('recognitions/req05', 'RecognitionController@req05')->name('recognitions.req05');
-    Route::delete('recognitions/req05/{id}', 'RecognitionController@destroy')->name('recognitions.destroy');
+Route::post('recognitions/req05', 'RecognitionController@recognitions')->name('recognitions');
+    
+Route::get('recognitions/req05', 'RecognitionController@req05')->name('recognitions.req05');
+Route::delete('recognitions/req05/{id}', 'RecognitionController@destroy')->name('recognitions.destroy');
 });

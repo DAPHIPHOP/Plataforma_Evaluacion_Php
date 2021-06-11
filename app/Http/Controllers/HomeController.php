@@ -27,6 +27,6 @@ class HomeController extends Controller
             return redirect()->route('admin.home')->with('status', session('status'));
         }
 
-        return redirect()->route('client.recfacial')->with('status', session('status'));
+        return redirect()->route('client.home')->with('status', session('status'));
     }
 }
