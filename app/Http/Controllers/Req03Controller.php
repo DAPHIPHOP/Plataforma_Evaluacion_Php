@@ -62,7 +62,7 @@ class Req03Controller extends Controller
             $user = $this->desc_intents();
             $id_evaluacion = $request->id_evaluacion;
                 
-            return view('client.recfacial','id_evaluacion');
+            return view('client.req03',compact('recognition','user','id_evaluacion'));
         }
        
     }
