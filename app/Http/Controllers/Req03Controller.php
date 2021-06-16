@@ -59,7 +59,8 @@ class Req03Controller extends Controller
         } catch (\Throwable $th) {
 
             $recognition = $this->func_recognition($request,0.00);
-            $user = $this->desc_intents();
+            $this->desc_intents();
+            $user = auth()->user();
             $id_evaluacion = $request->id_evaluacion;
                 
             return view('client.req03',compact('recognition','user','id_evaluacion'));
