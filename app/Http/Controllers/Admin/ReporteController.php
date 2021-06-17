@@ -49,7 +49,7 @@ class ReporteController extends Controller
             $i++;
         }
 
-
+//exportar  excel
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="Registro de notas '.$evaluacion->name.' .xlsx"');
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
