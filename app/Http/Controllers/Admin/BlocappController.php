@@ -28,6 +28,7 @@ class BlocappController extends Controller
     public function resultsapps()
     {
         //$quizz=Quizz::find();
+        //asadasdasd
         //$users = user::all();
 
 
