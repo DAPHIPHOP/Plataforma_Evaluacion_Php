@@ -28,7 +28,7 @@ class QuizzController extends Controller
      */
     public function create()
     {
-        return view('admin.Quizz.create');
+        return view('admin.quizz.create');
     }
 
     /**
@@ -78,7 +78,7 @@ class QuizzController extends Controller
     public function show($id)
     {
         $quizz=Quizz::find($id);
-        return view('admin.Quizz.show', ['quizz'=>$quizz]);
+        return view('admin.quizz.show', ['quizz'=>$quizz]);
     }
 
     /**
@@ -151,6 +151,6 @@ class QuizzController extends Controller
     public function results($id)
     {
         $quizz=Quizz::find($id);
-        return view('admin.Quizz.results', ['quizz'=>$quizz]);
+        return view('admin.quizz.results', ['quizz'=>$quizz]);
     }
 }
