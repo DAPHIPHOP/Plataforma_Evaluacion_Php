@@ -41,7 +41,7 @@
                 @else
                     <div class="d-flex justify-content-between py-3 px-5">
                         <div class="bg-red p-2">Validación Fallida</div>
-                        <a class="btn btn-primary" href="/recfacial">Continuar</a>
+                        <a class="btn btn-primary" href="/recfacial?id={{$recognition->id_evaluacion}}">Continuar</a>
                     </div>
                 @endif
             @else

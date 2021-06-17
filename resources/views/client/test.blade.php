@@ -151,7 +151,7 @@
 @endsection
       
 @section('script')
-<script type="text/javascript" src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js">
+<script type="text/javascript" src="https://cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
@@ -296,7 +296,7 @@
       
               setTimeout(() => {
                   $('#staticBackdrop').modal('show');
-              }, 5000);
+              }, 10000);
       
               function tomar_foto(){
                   //$('#staticBackdrop').modal('hide');
@@ -319,7 +319,7 @@
                   var cont_modal = document.getElementById("cont_modal");
                   //var modal = document.getElementById("modal_mensaje");
                   $.ajax({
-                      url: "{{URL::to('recfacial')}}",
+                      url: "/recfacial",
                       data: {
                           "_token": $("meta[name='csrf-token']").attr("content"),
                           "img_bytes": inp_hidden.value
@@ -327,12 +327,16 @@
                       dataType: "json",
                       method: "POST",
                       success: function(response) {
+                          var resp = parseInt(response.val,10);
                           
-                          cont_modal.innerHTML = "Resultado de Similitud: " + parseInt(response.val,10);
-
-                          setTimeout(() => {
+                        if(resp>90){
+                            cont_modal.innerHTML = "Resultado de Similitud: " + resp;
+                            setTimeout(() => {
                             $('#staticBackdrop').modal('hide');
                             }, 1000);
+                        }else{
+                            cont_modal.innerHTML = "Resultado de Similitud: " + resp + " Reintentelo";
+                        }
                           
                       },
                       error: function (error) {
