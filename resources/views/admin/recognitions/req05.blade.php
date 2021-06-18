@@ -1,49 +1,78 @@
 @extends('layouts.admin')
+@section('styles')
+  <style type="text/css">
+    @media (min-width: 760px) {
+      .card-columns {
+          column-count: 2;
+      }
+    }
+
+    @media (max-width: 759px){
+      .card-columns{
+        column-count:1;
+      }
+    }
+  </style>
+@endsection
 @section('content')
-<div class="container cards bg-white px-0">
-  
-<div class="card-header">
-  <h4>Registro de Identificación</h4>
-</div>
-<div class="card-body">
-    <div class="row">
-    @foreach ($users as $item)
-    <div class="col-lg-6 p-2">
-      <div class="card">
-        <div class="row g-0 col-12">
-          <div class="col-md-5 d-flex align-items-center" >
-            <img width="100%" id="" class="imagen_mostrar" src="" alt="" attr-img ="{{$item->image}}">
+<div class="content">
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="card">
+              <div class="card-header">
+                  Registro de Identificación
+              </div>
+              <div class="container-fluid mt-3">
+                <div class="card-columns">
+                   <!------------------>
+                   @foreach ($users as $item)
+                  <div class="card mb-3 shadow-sm bg-white rounded" style="height:200px;">
+                    <div class="row g-0" style="width:100%;margin-right:0px;margin-left:0px; height:100%">
+                    <div class="col-sm-4 d-flex justify-content-center align-items-center" style="background-color:#2f353a;">
+                      <div class="d-flex align-items-center" style="/*background:url(/images/foto-perfil-02.jpg); background-size: contain; background-repeat:no-repeat; background-position:center;*/ height:100%; width:100%;">
+                        <img src="\images/foto-perfil-02.jpg" height="auto" width="100%" class="imagen_mostrar" src="" alt="" attr-img ="{{$item->image}}">
+                      </div>
+                      
+                    </div>
+                    <div class="col-sm-8" style="padding:0">
+                      <div class="card-body">
+                        <h6 class="card-title text-right text-muted"><strong>COD: 47839405</strong></h6>
+                        <h6>{{$item->name}}</h6>
+                        <p class="card-text text-secondary">
+                          <strong>{{$item->email}}</strong>
+                        </p>
+                        <p class="card-text text-right"><small class="text-muted">{{$item->intentos}} Intentos Restantes</small></p>
+
+                      </div>
+                      <div class="card-footer" style="position: absolute;bottom: 0;width: 100%;">
+                        <form action="{{url("/admin/recognitions/req05/$item->id")}}" method="post">
+                          @csrf
+                            @method('DELETE')
+                          <div class="row d-flex justify-content-between px-3">
+                            <button type="button" onclick="ver_intentos(this)" attr_id = "{{$item->id}}" attr_nombre="{{$item->name}}" attr_img="{{$item->image}}" class="btn btn-primary">Ver más</button>
+                            @if (($item->intentos)<=0)
+                              <button type="submit" class="btn btn-danger">Desbloquear</button>
+                            @endif
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  @endforeach
+
+                <!------------------>
+                </div>
+               
+              </div>
+                
+
           </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <h6 class="card-title">{{$item->name}}</h6>
-              <p class="card-text">
-                Email: {{$item->email}}
-                <br>
-                Intentos Restantes: {{$item->intentos}}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <form action="{{url("/admin/recognitions/req05/$item->id")}}" method="post">
-            @csrf
-            @method('DELETE')
-            <div class="row justify-content-between px-3">
-            <button type="button" onclick="ver_intentos(this)" attr_id = "{{$item->id}}" attr_nombre="{{$item->name}}" attr_img="{{$item->image}}" class="btn btn-primary">Ver más</button>
-            @if (($item->intentos)<=0)
-              <button type="submit" class="btn btn-danger">Desbloquear</button>
-            @endif
-            </div>
-          </form>
-        </div>
       </div>
-    </div>
-    
-    @endforeach
   </div>
 </div>
-</div>
+
+    
 
 <div class="modal fade bd-example-modal-lg" id ="rec_usuario" tabindex="-1">
   <div class="modal-dialog modal-lg">
