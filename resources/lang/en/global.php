@@ -250,4 +250,6 @@ return [
     'no_alerts'                            => 'No alerts',
     'calendar'                             => 'Calendar',
     'messenger'                            => 'Messenger',
+    'apellidos'                            => 'Surname',
+    'dni'                                  => 'DNI',
 ];

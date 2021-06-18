@@ -29,6 +29,34 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
+                                <i class="fa fa-user fa-fw"></i>
+                            </span>
+                        </div>
+                        <input type="text" name="apellidos" class="form-control{{ $errors->has('apellidos') ? ' is-invalid' : '' }}" required autofocus placeholder="{{ trans('global.apellidos') }}" value="{{ old('apellidos', null) }}">
+                        @if($errors->has('apellidos'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('apellidos') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user fa-fw"></i>
+                            </span>
+                        </div>
+                        <input type="text" name="dni" class="form-control{{ $errors->has('dni') ? ' is-invalid' : '' }}" required autofocus placeholder="{{ trans('global.dni') }}" value="{{ old('dni', null) }}">
+                        @if($errors->has('dni'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('dni') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
                                 <i class="fa fa-envelope fa-fw"></i>
                             </span>
                         </div>
@@ -65,7 +93,7 @@
                 <hr>
                     <div class="form-group mb-4">
                         <label for="image" class="text-muted">Ingrese una Fotografía para identificarlo</label>
-                        <input id="input_subir" type="file" name="image" class="form-control" required placeholder="Seleccione una Imagen">
+                        <input id="input_subir" type="file" name="image" class="form-control" required placeholder="Seleccione una Imagen" accept="image/jpeg">
                         <div class="row bg-secondary mt-2 mx-2" id="contenedor_imagen" style="display:none;">
                             <img class="mx-auto my-2" src="" id="imagen_subida" alt="" width="50%">
                         </div>
