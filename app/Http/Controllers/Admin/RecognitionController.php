@@ -43,8 +43,8 @@ class RecognitionController extends Controller
 
     public function destroy($id){
         DB::table('recognitions')->where('id_usuario',$id)->delete();
-        DB::table('users')->where('id',$id)->update(['intentos'=>3]);
-        return redirect('admin.recognitions.req05');
+        DB::table('users')->where('id',$id)->update(['intentos'=>5]);
+        return redirect('admin/recognitions/req05');
     }
 
 

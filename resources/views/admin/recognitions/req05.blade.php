@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-8" style="padding:0">
                       <div class="card-body">
-                        <h6 class="card-title text-right text-muted"><strong>COD: 47839405</strong></h6>
+                        <h6 class="card-title text-right text-muted"><strong>COD: {{$item->dni}}</strong></h6>
                         <h6>{{$item->name}}</h6>
                         <p class="card-text text-secondary">
                           <strong>{{$item->email}}</strong>
