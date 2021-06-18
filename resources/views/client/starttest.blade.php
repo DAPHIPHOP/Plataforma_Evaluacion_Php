@@ -16,7 +16,7 @@
                 <div class="form-check mt-5 mb-2">
                     <input class="form-check-input " id="exampleCheck1" type="checkbox" required="">
                         <a class="form-check-label font-weight-bold" data-target="#exampleModal" data-toggle="modal" for="exampleCheck1" href="#">
-                            Acepto los términos y condiciones (Descarga el BlocApp)
+                            Acepto las condiciones de servicio y la política de privacidad de Face-Blocapp.
                         </a>
                     </input>
                 </div>
@@ -30,9 +30,9 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                                Términos y condiciones
-                            </h5>
+                            <h4 class="modal-title" id="exampleModalLabel">
+                                Términos y condiciones de uso
+                            </h4>
                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                 <span aria-hidden="true">
                                     ×
@@ -40,13 +40,30 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>El acceso al sitio web por parte del usuario, la utilización del contenido, productos y/o servicios implica estar de acuerdo con los terminos siguientes:</p>
-	                        <p>     1.El estudiante solo deberan usar el navegador Google Chrome para realizar un examen.</p>
-                            <p>     2.El estudiante acepta el tratamiendo de los datos que seran utilizados solo para este fin.</p>
-                            <p>     3.El estudiante deben contan con una camara para realiza un examen.</p>
-	                        <p>     4.El estudiante debe descargar el ejecutable BlocApp y ejecutarlo antes de un examen.</p>
-                            <p>Los datos ingresados por usuario  no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales.</p>
-                        </div>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                1. Cláusulas
+                            </h5>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                2. Condiciones legales de prestación del servicio
+                            </h5>
+                            <br>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                3. Condiciones de acceso del usuario
+                            </h5>
+                            <br>
+                            <p>Cláusulas</p>
+                            <br>
+                            <p>El usuario se compromete a leer detenidamente los términos y condiciones generales, antes de utilizar los servicios que ofrece el sistema.</p>
+                            <br>
+                            <p>Condiciones legales de prestación del servicio</p>
+                            <br>
+                            <p>Los datos ingresados por usuario  no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales. Es responsabilidad exclusiva del Usuario mantener la confidencialidad de dichos datos de su cuenta virtual y contraseña, notificar inmediatamente a soporte, si tiene conocimiento del uso no autorizado de su cuenta o de cualquier vulneración de las medidas de seguridad.</p>
+                            <br>
+                            <p>Condiciones de acceso del usuario</p>
+                            <br>
+                            <p>Se hace de conocimiento que el uso del ejecutable bloqueara todas la aplicaciones y pestañas a excepción del navegador permitido y es obligatorio que tenga instalado en el dispostivo para rendir la evaluación.Por consiguiente, el usuario debe acceder a la evaluación solamente a través del navegador Google Chrome, además debe de cerrar todas las aplicaciones en ejecución antes de inciar la evaluación.
+                                por último, el usuario debe tener una Cámara web a disposición durante el uso del sitio web ya que el sistema Face-Blocapp ejecutara un reconocimiento facial antes de ingresar a la evaluación y durante el transcurso de esta para validar al usuario.</p>
+                            </div>
                          <div class="modal-footer">
                             <a href="{{asset('BlocApp.exe')}}" class="btn btn-secondary" type="button">
                                 Aceptar
